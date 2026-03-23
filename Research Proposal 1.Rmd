@@ -76,3 +76,10 @@ reg_test <- lm(avgspeed ~ age + hgt, data=test)
 summary(reg_test)
 ```
 
+* Running a test regression including the variables of age and height, the results were the following:
+
+Age has a negative impact on the serve speed, as a 1 additional year of life decreases, on average and holding everything else constant, the serve speed of a player by 0.586 km/hr. We are above 95% confident that age has a significant, negative impact on serve speed. 
+
+Height has a positive effect on the serve speed, as a 1cm increase in the height of the player increases, on average and holding everything else constant, one's serve speed by 0.687 km/hr. We are above 99.9% confident that the height of a player has a significant, positive impact on their serve speed. 
+
+This is in line with our assumptions, as we expect that the older a player gets, the slower his swing is, resulting in an overall slower serve speed. Following the same logic, we expect that the taller the player is, the higher his serve point of impact is, the easier it is for such player to generate power, resulting in an overall faster serve when compared to shorter players. 
