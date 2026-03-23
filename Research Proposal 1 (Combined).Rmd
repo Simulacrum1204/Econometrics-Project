@@ -84,13 +84,13 @@ reg_test <- lm(avgspeed ~ age + hgt, data=tennis.data)
 summary(reg_test)
 ```
 
-* Running a test regression, with only the first 20 ATP players, of which the data was most easily found, including the variables of age and height, the results were the following:
+* As an initial test, a regression was run on a sample of the first 20 ATP players for whom data was most readily available, incorporating age and height as independent variables. The results are as follows:
 
-Age has a negative impact on the serve speed, as a 1 additional year of life decreases, on average and holding everything else constant, the serve speed of a player by 0.586 km/hr. We are above 95% confident that age has a significant, negative impact on serve speed. 
+Age was found to have a statistically significant negative effect on serve speed. Specifically, each additional year of age is associated with a decrease in average serve speed of 0.586 km/h, holding all other variables constant. This result is significant at the 95% confidence level, suggesting that as players grow older, their serve speed tends to decline — consistent with the expected reduction in physical explosiveness and swing speed that accompanies aging.
 
-Height has a positive effect on the serve speed, as a 1cm increase in the height of the player increases, on average and holding everything else constant, one's serve speed by 0.687 km/hr. We are above 99.9% confident that the height of a player has a significant, positive impact on their serve speed. 
+Height was found to have a statistically significant positive effect on serve speed, and represents the strongest predictor in this initial model. Each additional centimeter of height is associated with an increase in average serve speed of 0.687 km/h, holding all other variables constant. This result is significant at the 99.9% confidence level, providing strong evidence that taller players are able to generate greater serve velocity. This is consistent with our hypothesis: greater height raises the point of ball contact, creates a more favorable angle into the service box, and allows for a longer swing arc — all of which contribute to higher serve speeds.
 
-This is in line with our assumptions, as we expect that the older a player gets, the slower his swing is, resulting in an overall slower serve speed. Following the same logic, we expect that the taller the player is, the higher his serve point of impact is, the easier it is for such player to generate power, resulting in an overall faster serve when compared to shorter players. 
+Both findings align with our initial expectations and lend early support to the hypothesis that physical attributes are primary determinants of serve speed among professional ATP players. It should be noted, however, that this regression is based on a limited sample of 20 observations, and the results should be interpreted with caution until the full data set is incorporated.
 
 
 ## Regression 2: Everything
