@@ -1,0 +1,136 @@
+  ---
+title: "Research Proposal"
+author: "GJornert"
+date: "2026-02-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readxl)
+```
+
+### The Determinants of Serve Speed in Professional Tennis 
+
+In tennis, the serve is far more than just the starting point of a rally — it is one of the most decisive shots in the game. A powerful serve can earn a player a free point, limit their opponent's ability to return aggressively, and dictate the flow of the entire match. At the highest levels of professional tennis, serve speed is considered a critical competitive advantage, which raises an important question: what factors actually determine how fast an ATP player can serve?
+
+This paper investigates the determinants of average serve speed among professional ATP players through a series of regression analyses. We examine both physical characteristics — including height, weight, and age — as well as experiential and equipment-related variables, such as years on tour and racket specifications. Our central research question is: to what extent do a player's physical attributes, professional experience, and equipment explain variation in average serve speed? More specifically, we ask whether natural physical factors or acquired, controllable factors are the stronger predictors of performance.
+
+Understanding what drives serve speed also carries meaningful economic implications. If serve speed is primarily determined by physical traits, it becomes a more predictable variable for sports analysts, bettors, and scouts — offering an edge in forecasting match outcomes based on player profiles. On the other hand, if equipment plays a significant role, racket manufacturers have a tangible, data-backed basis for marketing performance claims, much as footwear and apparel brands have done in other sports. Either finding has real consequences for how money flows through the tennis industry.
+
+We hypothesize that physical attributes — particularly height — will be the strongest predictor of serve speed, as taller players benefit from a more favorable serving angle and a longer swing arc, allowing them to generate greater velocity more naturally. Weight and age are also expected to be significant physical factors, with serve speed likely peaking during a player's prime years and declining thereafter. While we expect racket specifications — such as racket weight and string tension — to have a meaningful impact on serve speed as well, we anticipate their effect to be secondary to that of physical traits, since equipment can optimize performance but cannot fully compensate for the bio mechanical advantages conferred by a player's body. To test these hypotheses, our data set includes player-level statistics from the ATP tour, comprising physical measurements, equipment specifications, and career statistics.
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+### Research Proposal
+How do physical characteristics, equipment, ATP/WTA tour activity, and ranking affect the average serve speed of a tennis professional? 
+Average serve speed in top 100 -
+
+* hgt - height - positive correlation
+* wgt - weight - positive correlation (multicollinearity w height)
+* age - age - negative
+* rank - ATP/WTA ranking - positive, 
+* mtch - number of matches played/year - unknown 
+* rhsize - racket head size - negative, 
+* fstserve - first serve percentage - negative 
+* dblfault - double faults - positive
+* gen - gender - male (1) players serve faster than female (0) player (standby for now).
+* rhand - Right(1)/left(0)-handed - unknown
+*Unobservable (omitted) variable:*
+* Toss height (point of impact) - positive correlation with height and serve speed (positive bias).
+
+### List of Future Regressions 
+
+$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 (hgt)^2 + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age +\beta_2 hgt + \beta_3 rhand + \beta_4 fstserve + \beta_5 dblfault + \mu $$
+
+### Load data
+
+```{r}
+tennis.data <- read_excel("econ-research_test.xlsx")
+
+summary(tennis.data)
+```
+```{r}
+#rename column by name
+colnames(tennis.data)[colnames(tennis.data) == '1serve'] <- 'frtserve'
+colnames(tennis.data)[colnames(tennis.data) == '2fault'] <- 'dblfault'
+
+```
+
+## Test Regression
+
+```{r}
+reg_test <- lm(avgspeed ~ age + hgt, data=tennis.data)
+summary(reg_test)
+```
+
+* Running a test regression, with only the first 20 ATP players, of which the data was most easily found, including the variables of age and height, the results were the following:
+
+Age has a negative impact on the serve speed, as a 1 additional year of life decreases, on average and holding everything else constant, the serve speed of a player by 0.586 km/hr. We are above 95% confident that age has a significant, negative impact on serve speed. 
+
+Height has a positive effect on the serve speed, as a 1cm increase in the height of the player increases, on average and holding everything else constant, one's serve speed by 0.687 km/hr. We are above 99.9% confident that the height of a player has a significant, positive impact on their serve speed. 
+
+This is in line with our assumptions, as we expect that the older a player gets, the slower his swing is, resulting in an overall slower serve speed. Following the same logic, we expect that the taller the player is, the higher his serve point of impact is, the easier it is for such player to generate power, resulting in an overall faster serve when compared to shorter players. 
+
+
+## Regression 2: Everything
+
+
+```{r}
+fulldata <- read_excel("econ.research_v1.xlsx")
+
+summary(fulldata)
+```
+```{r}
+#rename column by name
+colnames(fulldata)[colnames(fulldata) == '1serve'] <- 'frtserve'
+colnames(fulldata)[colnames(fulldata) == '2faults'] <- 'dblfault'
+
+```
+
+Before running the regression, we input the full data, instead of simply using the test data.
+
+$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
+
+```{r}
+every_reg <- lm(avgspeed ~ rank + age + hgt + rhand + rhsize + frtserve + dblfault, data = fulldata)
+summary(every_reg)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
