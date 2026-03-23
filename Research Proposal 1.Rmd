@@ -9,6 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(readxl)
+```
+
+
 In tennis, the ability to hit the ball with a tennis racket is the fundamental aspect of the game, and no other time is that ability more important than during the initial serve. The serve speed of a player determines a myriad of aspects of the game, including whether the other player can hit the ball back and continue the game, whether the ball will continue to travel at that speed, and the overall positions of the players. In the upper echelon of the tennis world, serve speed is among the most vital of skills. So, what exactly affects a top-level player's serve speed? By looking at physical factors of the player, such as height, weight, gender, and age, we can get a general estimate of how an individual's body affects their serve speed. However, we also need to consider their field experience and the equipment they use. We would like to understand what truly makes an impact on a person's ability to play tennis: is it a person's body and natural ability, or is experience and equipment what makes the difference?
 
 In terms of economic dilemmas, if the opening sequence determines a game, then improving it can improve the monetary aspect of the game. If it is determined by genetics, then more people could bet money on someone with a better body against someone who seems weaker, hoping they will get served out early. Or if it's related to equipment, companies can advertise how much better their rackets are for opening serves, like Nike did in track and field.
@@ -57,16 +62,30 @@ $$ServeSpeed =\beta_0 +  + \mu $$
 $$ServeSpeed =\beta_0 +  + \mu $$
 $$ServeSpeed =\beta_0 +  + \mu $$
 
+### Load data
 
 ```{r}
-test <- read_excel("econ.research_test.xlsx")
+tennis.data <- read_excel("econ-research_test.xlsx")
 
 summary(test)
+```
+```{r}
+#rename column by name
+colnames(tennis.data)[colnames(tennis.data) == '1serve'] <- 'frtserve'
+colnames(tennis.data)[colnames(tennis.data) == '2fault'] <- 'dblfault'
 
-reg_test <- lm(avgspeed ~ age + hgt, data=test)
-summary(reg_test)
 ```
 
+
+
+##regression 1: Everything
+
+$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
+
+```{r}
+every_reg <- lm(avgspeed ~ rank + age + hgt + rhand + rhsize + frtserve + dblfault, data = tennis.data)
+summary(every_reg)
+```
 
 
 
