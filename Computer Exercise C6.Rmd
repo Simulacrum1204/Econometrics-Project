@@ -1,0 +1,168 @@
+---
+title: "Computer Exercise C6"
+author: "Hayden Arnold"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(wooldridge)
+library(broom)
+library(texreg)
+library(readxl)
+library(xtable)
+library(dplyr)
+library(corrr)
+library(readxl)
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+## Computer Exercise C6.1
+
+### Load Data
+
+```{r}
+ce1_data <- read_xlsx("kielmc_v4.xlsx")
+ce1_data <- filter(ce1_data, year == 1981)
+```
+
+
+### 1.
+
+To study the effects of the incinerator location on housing price, consider the simple regression model: $\log (price)=β0+β1 \log(dist)+\mu$.
+
+True or False: A negative sign is expected for $\beta_1$ if the presence of the incinerator depresses housing prices.
+
+```{r}
+ce1_reg1 <- lm(lprice ~ ldist, data = ce1_data)
+summary(ce1_reg1)
+```
+
+### 2.
+
+To the simple regression model in part (i), add the variables log(intst), log(area), log(land), rooms, baths, and age, 
+
+where intst is distance from the home to the interstate, area is square footage of the house, land is the lot size in square feet, rooms is total number of rooms, baths is number of bathrooms, and age is age of the house in years.
+
+$$\log (price)=β0+β1 \log(dist)+ \log(intst)+\log(area)+\log(land)+rooms+baths+age+\mu$$
+```{r}
+ce1_reg1 <- lm(lprice ~ ldist + lintst + larea + lland + rooms + baths + age, data = ce1_data)
+summary(ce1_reg1)
+```
+
+### 3.
+
+Add $[\log(intst)]^2$ to the model from part (ii).
+
+```{r}
+sq_lintst <- ce1_data$lintst^2
+
+ce1_reg3 <- lm(lprice ~ ldist + lintst + sq_lintst + larea + lland + rooms + baths + age, data = ce1_data)
+summary(ce1_reg3)
+```
+
+### 4.
+
+Create a new variable [log(dist)]2 as the square of log(dist), and add it to the model from part 3.
+
+```{r}
+sq_dist <- ce1_data$ldist^2
+
+ce1_reg4 <- lm(lprice ~ ldist + sq_dist + lintst + sq_lintst + larea + lland + rooms + baths + age, data = ce1_data)
+summary(ce1_reg4)
+```
+
+## Computer Exercise C6.13
+
+### Load Data
+
+```{r}
+ce13_data <- read_xlsx("meap00_v5.xlsx")
+```
+
+### 1.
+
+Use OLS to estimate the following model:
+$$ math4=β0+β1 lexppp+β2 lenroll+β3 lunch+u $$
+```{r}
+ce13_reg1 <- lm(math4 ~ lexppp + lenroll + lunch, data = ce13_data)
+summary(ce13_reg1)
+```
+### 2.
+
+```{r}
+summary(ce13_data$math4)
+```
+
+```{r}
+summary(ce13_reg1$fitted.values)
+```
+
+### 3.
+
+```{r}
+summary(ce13_reg1$residuals)
+```
+```{r}
+ce13_data$residuals <- ce13_reg1$residuals
+```
+
+### 4.
+
+```{r}
+lexpppsq <- ce13_data$lexppp^2
+lenrollsq <- ce13_data$lenroll^2
+lunchsq <- ce13_data$lunch^2
+
+ce13_reg2 <- lm(math4 ~ lexppp + lexpppsq + lenroll + lenrollsq + lunch + lunchsq, data = ce13_data)
+ce13_reg2_sum <- summary(ce13_reg2)
+ce13_reg2_sum
+
+
+```
+
+#### 4
+
+```{r}
+zlexppp <- (ce13_data$lexppp - mean(ce13_data$lexppp)) / sd(ce13_data$lexppp)
+zlenroll <- (ce13_data$lenroll - mean(ce13_data$lenroll)) / sd(ce13_data$lenroll)
+zlunch <- (ce13_data$lunch - mean(ce13_data$lunch)) / sd(ce13_data$lunch)
+ 
+
+ce13_reg3 <- lm(math4 ~ zlexppp + zlenroll + zlunch, data = ce13_data)
+summary(ce13_reg3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
