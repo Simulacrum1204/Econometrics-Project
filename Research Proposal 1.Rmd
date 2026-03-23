@@ -28,7 +28,7 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 
 ### Research Proposal
-How does physical characteristics, equipment, ATP/WTA tour activity and ranking affect the average serve speed of a tennis professional? 
+How do physical characteristics, equipment, ATP/WTA tour activity, and ranking affect the average serve speed of a tennis professional? 
 Average serve speed in top 100 -
 
 * hgt - height - positive correlation
@@ -66,4 +66,22 @@ summary(test)
 reg_test <- lm(avgspeed ~ age + hgt, data=test)
 summary(reg_test)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
