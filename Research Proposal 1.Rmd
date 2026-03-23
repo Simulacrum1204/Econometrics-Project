@@ -1,0 +1,69 @@
+  ---
+title: "Research Proposal"
+author: "GJornert"
+date: "2026-02-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In tennis, the ability to hit the ball with a tennis racket is the fundamental aspect of the game, and no other time is that ability more important than during the initial serve. The serve speed of a player determines a myriad of aspects of the game, including whether the other player can hit the ball back and continue the game, whether the ball will continue to travel at that speed, and the overall positions of the players. In the upper echelon of the tennis world, serve speed is among the most vital of skills. So, what exactly affects a top-level player's serve speed? By looking at physical factors of the player, such as height, weight, gender, and age, we can get a general estimate of how an individual's body affects their serve speed. However, we also need to consider their field experience and the equipment they use. We would like to understand what truly makes an impact on a person's ability to play tennis: is it a person's body and natural ability, or is experience and equipment what makes the difference?
+
+In terms of economic dilemmas, if the opening sequence determines a game, then improving it can improve the monetary aspect of the game. If it is determined by genetics, then more people could bet money on someone with a better body against someone who seems weaker, hoping they will get served out early. Or if it's related to equipment, companies can advertise how much better their rackets are for opening serves, like Nike did in track and field.
+
+This paper is meant to dive into how a professional tennis player's opening serve speed is determined by a myriad of factors, both physical and economic, and find the best mix to find the formula for the best possible serve speed. We hypothesize that the quality and weight of the rackets themselves are responsible for the changes in serve speed, with higher quality rackets being more aerodynamic and heavier rackets being more difficult to swing.
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+### Research Proposal
+How does physical characteristics, equipment, ATP/WTA tour activity and ranking affect the average serve speed of a tennis professional? 
+Average serve speed in top 100 -
+
+* hgt - height - positive correlation
+* wgt - weight - positive correlation (multicollinearity w height)
+* age - age - negative
+* rank - ATP/WTA ranking - positive, 
+* mtch - number of matches played/year - unknown 
+* rhsize - racket head size - negative, 
+* 1serve - first serve percentage - negative 
+* 2fault - double faults - positive
+* gen - gender - male (1) players serve faster than female (0) player (standby for now).
+* rhand - Right(1)/left(0)-handed - unknown
+*Unobservable (omitted) variable:*
+* Toss height (point of impact) - positive correlation with height and serve speed (positive bias).
+
+
+$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \beta_2 (hgt)^2 + \mu $$
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 rhand + \mu $$
+$$ServeSpeed =\beta_0 + \beta_0 fstserve + \mu $$
+$$ServeSpeed =\beta_0 + \beta_1 fstserve + \beta_2 dblfault + \mu $$
+$$ServeSpeed =\beta_0 +  + \mu $$
+$$ServeSpeed =\beta_0 +  + \mu $$
+$$ServeSpeed =\beta_0 +  + \mu $$
+$$ServeSpeed =\beta_0 +  + \mu $$
+
+
+```{r}
+test <- read_excel("econ.research_test.xlsx")
+
+summary(test)
+
+reg_test <- lm(avgspeed ~ age + hgt, data=test)
+summary(reg_test)
+```
+
