@@ -81,7 +81,7 @@ summary(ce1_reg4)
 ### Load Data
 
 ```{r}
-ce13_data <- read_xlsx("meap00_v5.xlsx")
+ce13_data <- read_xlsx("meap00_v1.xlsx")
 ```
 
 ### 1.
@@ -111,6 +111,8 @@ summary(ce13_reg1$residuals)
 ce13_data$residuals <- ce13_reg1$residuals
 ```
 
+
+
 ### 4.
 
 ```{r}
@@ -121,48 +123,34 @@ lunchsq <- ce13_data$lunch^2
 ce13_reg2 <- lm(math4 ~ lexppp + lexpppsq + lenroll + lenrollsq + lunch + lunchsq, data = ce13_data)
 ce13_reg2_sum <- summary(ce13_reg2)
 ce13_reg2_sum
-
-
 ```
 
-#### 4
+
+
+```{r}
+ce13_data2 <- ce13_data
+ce13_data2$lexpppsq <- lexpppsq
+ce13_data2$lenrollsq <- lenrollsq
+ce13_data2$lunchsq <- lunchsq
+
+t_test_result <- t.test(ce13_data, ce13_data2)
+df <- t_test_result$parameter
+```
+```{r}
+anova(ce13_reg1, ce13_reg2)
+```
+
+#### 5
 
 ```{r}
 zlexppp <- (ce13_data$lexppp - mean(ce13_data$lexppp)) / sd(ce13_data$lexppp)
 zlenroll <- (ce13_data$lenroll - mean(ce13_data$lenroll)) / sd(ce13_data$lenroll)
 zlunch <- (ce13_data$lunch - mean(ce13_data$lunch)) / sd(ce13_data$lunch)
+zmath4 <- (ce13_data$math4 - mean(ce13_data$math4)) / sd(ce13_data$math4)
  
 
-ce13_reg3 <- lm(math4 ~ zlexppp + zlenroll + zlunch, data = ce13_data)
+ce13_reg3 <- lm(zmath4 ~ zlexppp + zlenroll + zlunch, data = ce13_data)
 summary(ce13_reg3)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
