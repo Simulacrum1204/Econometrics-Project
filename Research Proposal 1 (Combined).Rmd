@@ -1,6 +1,6 @@
   ---
-title: "Research Proposal"
-author: "GJornert"
+title: "A Study on the Average Serve Speed of Top Tennis Players, and the Factors that Affect them"
+author: "GJornert, EMelindo, HArnold"
 date: "2026-02-02"
 output: html_document
 ---
@@ -36,9 +36,11 @@ This paper investigates the determinants of average serve speed among profession
 Understanding what drives serve speed also carries meaningful economic implications. If serve speed is primarily determined by physical traits, it becomes a more predictable variable for sports analysts, bettors, and scouts — offering an edge in forecasting match outcomes based on player profiles. On the other hand, if equipment plays a significant role, racket manufacturers have a tangible, data-backed basis for marketing performance claims, much as footwear and apparel brands have done in other sports. Either finding has real consequences for how money flows through the tennis industry.
 
 We hypothesize that physical attributes — particularly height — will be the strongest predictor of serve speed, as taller players benefit from a more favorable serving angle and a longer swing arc, allowing them to generate greater velocity more naturally. Weight and age are also expected to be significant physical factors, with serve speed likely peaking during a player's prime years and declining thereafter. While we expect racket specifications — such as racket weight and string tension — to have a meaningful impact on serve speed as well, we anticipate their effect to be secondary to that of physical traits, since equipment can optimize performance but cannot fully compensate for the bio mechanical advantages conferred by a player's body. To test these hypotheses, our data set includes player-level statistics from the ATP tour, comprising physical measurements, equipment specifications, and career statistics.
+Our findings confirm that height is the dominant and most robust determinant of serve speed, while most other variables — including age, equipment, and handedness — do not reach statistical significance in the full sample.
 
 
-### Research Proposal
+### Data and variables
+
 How do physical characteristics, equipment, ATP/WTA tour activity, and ranking affect the average serve speed of a tennis professional? 
 Average serve speed in top 100 -
 
@@ -52,24 +54,11 @@ Average serve speed in top 100 -
 * dblfault - double faults - positive
 * gen - gender - male (1) players serve faster than female (0) player (standby for now).
 * rhand - Right(1)/left(0)-handed - unknown
-*Unobservable (omitted) variable:*
+* Unobservable (omitted) variable:*
 * Toss height (point of impact) - positive correlation with height and serve speed (positive bias).
 
-### List of Future Regressions 
-
-$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
-
-$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
-
-$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \mu $$
-
-$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 (hgt)^2 + \mu $$
-
-$$ServeSpeed =\beta_0 + \beta_1 age +\beta_2 hgt + \beta_3 rhand + \beta_4 fstserve + \beta_5 dblfault + \mu $$
-
-### Load data
-
-```{r}
+```{r} 
+# Partial data
 tennis.data <- read_excel("econ-research_test.xlsx")
 
 summary(tennis.data)
@@ -80,6 +69,31 @@ colnames(tennis.data)[colnames(tennis.data) == '1serve'] <- 'frtserve'
 colnames(tennis.data)[colnames(tennis.data) == '2fault'] <- 'dblfault'
 
 ```
+
+```{r}
+# Completed data set
+fulldata <- read_excel("econ.research_v1 (1).xlsx")
+
+summary(fulldata)
+```
+```{r}
+#rename column by name
+colnames(fulldata)[colnames(fulldata) == '1serve'] <- 'frtserve'
+colnames(fulldata)[colnames(fulldata) == '2faults'] <- 'dblfault'
+
+```
+
+### List of Future Regressions 
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \beta_2 hgt^2 + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 (hgt)^2 + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 rank + \beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6 rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu $$
 
 ### Test Regression
 
@@ -96,34 +110,42 @@ Height was found to have a statistically significant positive effect on serve sp
 
 Both findings align with our initial expectations and lend early support to the hypothesis that physical attributes are primary determinants of serve speed among professional ATP players. It should be noted, however, that this regression is based on a limited sample of 20 observations, and the results should be interpreted with caution until the full data set is incorporated.
 
+### Regression 1 & 2: Height
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 hgt + \beta_2 hgt^2 + \mu $$
+
 
 ```{r}
-fulldata <- read_excel("econ.research_v1.xlsx")
+heigth_reg <- lm(avgspeed ~ hgt, data = fulldata)
+summary(heigth_reg)
 
-summary(fulldata)
+## Height Squared
+
+hgt_sq <- fulldata$hgt^2
+heigthsq_reg <- lm(avgspeed ~ hgt + hgt_sq, data = fulldata)
+summary(heigthsq_reg)
+
+## heteroskedasticity test
+bptest(avgspeed ~ hgt + hgt_sq, data = fulldata, studentize = TRUE)
 ```
-```{r}
-#rename column by name
-colnames(fulldata)[colnames(fulldata) == '1serve'] <- 'frtserve'
-colnames(fulldata)[colnames(fulldata) == '2faults'] <- 'dblfault'
 
-```
+The squared term for height was tested but found to be insignificant, confirming a linear relationship between height and serve speed. For this reason, it will be excluded from the future regressions.
 
-Before running the regression, we input the full data, instead of simply using the test data.
+### Regression 3: Height and Age
 
-### Regression 2
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \mu $$
+
+$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 (hgt)^2 + \mu $$
 
 ```{r}
-reg_2 <- lm(avgspeed ~ hgt, data = fulldata)
-summary(reg_2)
-```
+hgtage_reg <- lm(avgspeed ~ age + hgt, data = fulldata)
+summary(hgtage_reg)
 
+hgtsqage_reg <- lm(avgspeed ~ age + hgt + hgt_sq, data = fulldata)
+summary(hgtsqage_reg)
 
-### Regression 3
-
-```{r}
-reg_3 <- lm(avgspeed ~ age + hgt, data = fulldata)
-summary(reg_3)
 ```
 
 Checking for heteroskedasticity: 
@@ -153,34 +175,22 @@ pchisq(reg3_lm_stat, df=2, lower.tail = FALSE)
 plot(fitted(reg_3), residuals(reg_3))
 ```
 
-The results from both BP test and White test prove that this model is homoskedastic. 
+The results from both BP test and White test prove that this model is homoskedastic. Both tests confirm the model's residuals have constant variance. Standard errors and significance levels reported in the regression output are therefore reliable and do not require correction.
 
-### Regression 4
-
-```{r}
-
-hgt_sq <- fulldata$hgt^2
-  
-reg_4 <- lm(avgspeed ~ age + hgt+ hgt_sq, data = fulldata)
-summary(reg_4)
-```
-
-We checked for a nonlinear relationship, and did not find it as the height variable become insignificant when adding the square variable. 
-
-### Regression 5
-
-```{r}
-reg_5 <- lm(avgspeed ~ age + hgt + hgt_sq + rhand + frtserve + dblfault, data = fulldata)
-summary(reg_5)
-```
-
-
-### Regression 6
+### Regression 4: All Variables
 
 ```{r}
 every_reg <- lm(avgspeed ~ rank + age + hgt + rhand + rhsize + frtserve + dblfault, data = fulldata)
 summary(every_reg)
 ```
+
+* Height (hgt): Statistically significant at the 99.9% level (p < 0.001). Each additional centimeter of height increases average serve speed by 0.761 km/h, holding all else constant. This is the dominant predictor in the model and is consistent across every specification tested.
+* Double Faults (dblfault): Significant at the 95% level (p = 0.042). Each additional double fault is associated with a 0.019 km/h increase in serve speed. This likely reflects a behavioral pattern — players who serve harder accept a higher fault risk, so double faults are a proxy for serve aggression rather than a cause of speed.
+* Age (age): Negative coefficient (−0.103) but not statistically significant (p = 0.433). Age does not independently explain serve speed variation once height is controlled for. This contradicts our initial test-sample result and suggests the earlier significance was driven by the small n=21 sample.
+* Dummy Variable (rhand): Positive coefficient (2.209) suggesting right-handers serve ~2.2 km/h faster, but not significant (p = 0.165). Sample is heavily skewed right-handed (87%), limiting statistical power.
+* Racket Head Size (rhsize): Positive (0.092) but not significant (p = 0.144). Equipment does not appear to meaningfully explain serve speed differences at the professional level, consistent with the idea that all top players optimize their equipment.
+* First Serve % (frtserve): Negative (−0.224) but not significant (p = 0.145). The direction is intuitive — players who serve harder make a lower percentage — but the effect is absorbed by other variables.
+The overall fit of the model can be seen through the adjusted R^2 = 0.517, meaning the model explains roughly 52% of the variation in serve speed. 
 
 Testing for heteroskedasticity
 
@@ -211,4 +221,41 @@ plot(fitted(reg_6), residuals(reg_6))
 
 This model does not suffer from heteroskedasticity. We can trust the significance/standard error to be correct.
 
+The primary endogeneity concern in this model is the omitted variable of toss height/point of contact, which we already identified in our original variable list. This variable is positively correlated with both height (taller players make contact higher with the ball) and serve speed, meaning height's coefficient may carry a slight upward bias. Since toss height is unavailable to us from the official ATP data, it cannot be directly controlled for in our regression. However, because it is largely a function of height itself, we believe the bias to be insignificant. A second concern is reverse causality between double faults and serve speed, as players usually decrease serve speed because they are already double-faulting frequently. It becomes a matter of strategy more than a matter of physical capabilities. 
+
+```{r}
+boxplot(fulldata$avgspeed,
+        data = fulldata,
+        main="Average Serve Speed",
+        xlab = "",
+        ylab = "Height",
+        col = "orange",
+        border = "brown"
+        )
+```
+
+```{r results='asis'}
+small <- ifelse(fulldata$hgt<205, 1, 0)
+
+reg_6 <- lm(avgspeed ~ age + hgt + rhand + rhsize + frtserve + dblfault, data = fulldata)
+summary(reg_6)
+reg_7 <- lm(avgspeed ~ age + hgt + rhand + rhsize + frtserve + dblfault + small, data = fulldata)
+summary(reg_7)
+
+htmlreg(list(reg_6, reg_7),
+        stars=c(0.01,0.05,0.1),
+        caption = "Dep Var: R&D Intensity",
+        star.symbol = "\\*",
+        caption.above = TRUE, 
+        custom.model.names=c("Baseline", "No Outlier"),
+        digits=4)
+```
+
+Taking out the outliers does not impact the significance of the coefficients. 
+
+## Conclusion
+
+This paper examined the determinants of average serve speed among the top 100 ATP players using OLS regression analysis. Across all model specifications, height emerged as the singular robust predictor of serve speed, with each centimeter of additional height associated with approximately 0.76 km/h of additional speed. Double faults — interpreted here as a proxy for serve aggression — were the only other variable to reach statistical significance. Age, our dummy variable for being right or left handed, racket head size, and first-serve percentage were not statistically significant once height was included in the model.
+These results carry meaningful implications. For sports analysts and bettors, serve speed is largely a function of a fixed physical trait, making it a predictable input for match forecasting. For equipment manufacturers, the lack of significance for racket head size suggests that at the professional level, players have already optimized their gear, and performance differences are driven by the athlete, not the equipment.
+The primary limitation of this study is sample size (n=100) and the cross-sectional nature of the data. Longitudinal data tracking individual players over time would allow for stronger causal claims, particularly regarding age-related decline. Future work should also explore the inclusion of toss height or point-of-contact data, which remains the key unobservable in this analysis.
 
