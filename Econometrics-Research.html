@@ -355,8 +355,8 @@ display: none;
 <table>
 <tbody>
 <tr class="odd">
-<td>tle: “A Study on the Average Serve Speed of Top Tennis Players, and
-the Factors that Affect them”</td>
+<td>tle: “A Study on the Factors that Affect the Average Serve Speed of
+Top Tennis Players”</td>
 </tr>
 <tr class="even">
 <td>thor: “GJornert, EMelindo, HArnold”</td>
@@ -413,6 +413,54 @@ and career statistics. Our findings confirm that height is the dominant
 and most robust determinant of serve speed, while most other variables —
 including age, equipment, and handedness — do not reach statistical
 significance in the full sample.</p>
+</div>
+<div id="literature-review" class="section level3">
+<h3>Literature Review</h3>
+<p>We were not surprised to find out that other researches had
+previously been interested in trying to understand how different
+variables can potentially affect a player’s serve speed.</p>
+<div id="tennis-serve-biomechanics" class="section level4">
+<h4>Tennis Serve Biomechanics</h4>
+<p>Tennis Serve Biomechanics, Joint Load Mechanics, and Overuse
+Injuries: A Narrative Review by Caroline Martin, Pierre Touzard, Loic
+Fourel, and Babette M. Pluim examines how the body is affected by the
+act of serving. finding that improper form and technique induce
+eminently traumatic mechanical joint loading, which can lead to injury
+over time. To mitigate joint damage, the paper finds that teaching
+proper serving technique, choosing appropriate equipment, and training
+conditions can reduce the effects of a tennis serve on the body.
+providing a reason behind the link between a player’s serve, their
+equipment, and their body.</p>
+</div>
+<div id="the-role-of-toss-zenith-and-impact-height-in-the-serve-speed-in-junior-tennis-players." class="section level4">
+<h4>The Role of Toss Zenith and Impact Height in the Serve Speed in
+Junior Tennis Players.</h4>
+<p>The Role of Toss Zenith and Impact Height in the Relationship Between
+Shoulder Rotation Strength and Serve Speed in Junior Tennis Players, by
+Jan Vacek, Michal Vagner, Jan Malecek, Jachym Simsa, Vladan Olah, and
+Petr Stastny. The paper details how various factors, such as zenith
+height, impact height, and the zenith–impact differential of an opening
+affect Serve Speed in Junior Tennis Players. Since this research is
+based on junior players that are transitioning, or trying to, into the
+professional world, the findings are likely to be similar to those of
+professional players. Their findings show that the height of the Impact
+showed a positive association with serve speed, as well as with the
+execution of the opening toss and its consistency, significantly
+increasing serve speed.</p>
+</div>
+<div id="age-and-sex-related-upper-body-performance-in-young-tennis-players." class="section level4">
+<h4>Age and sex-related upper body performance in young tennis
+players.</h4>
+<p>Age- and sex-related upper-body performance differences in
+competitive young tennis players, by Jaime Fernandez-Fernandez, Fabio
+Yuzo Nakamura, Victor Moreno-Perez, Alejandro Lopez-Valenciano, Juan Del
+Coso, and Cesar Gallo-Salazar. The study aimed to analyze the physical
+abilities of young male and female tennis players to identify
+relationships among physical variables and serve speed. The study
+directly uses serve speed as a factor, making it a relevant reference
+for comparing with our own findings. The study found that service speed
+increased across all players, regardless of sex.</p>
+</div>
 </div>
 <div id="data-and-variables" class="section level3">
 <h3>Data and variables</h3>
@@ -483,54 +531,60 @@ observations across 9 variables.</p>
 <div id="variable-descriptions" class="section level3">
 <h3>Variable Descriptions</h3>
 <ul>
-<li><p>avgspeed: Average serve speed (measured in km/h). This is the
-dependent variable, measured as each player’s average serve speed across
-all matches played during the 2025 season. It serves as a proxy for
-overall serving power.</p></li>
-<li><p>hgt: Height (measured in cm). This represents a player’s standing
-height in centimeters. Taller players benefit from a higher point of
-ball contact, a more favorable angle into the service box, and a longer
-swing arc, all of which are expected to generate greater serve speed. We
-hypothesize a positive relationship with serve speed.</p></li>
-<li><p>age: Age (measured in years). The player’s age as of the 2025
-season. Physical explosiveness and swing speed are generally expected to
-peak in a player’s mid-to-late twenties and decline thereafter, leading
-us to expect a negative relationship between age and serve
-speed.</p></li>
-<li><p>rank: ATP ranking (1–100). This is the player’s end-of-season ATP
+<li><p><span class="math inline">\(avgspeed\)</span>: Average serve
+speed (measured in <strong>km/h</strong>). This is the dependent
+variable, measured as each player’s average serve speed across all
+matches played during the 2025 season. It serves as a proxy for overall
+serving power.</p></li>
+<li><p><span class="math inline">\(hgt\)</span>: Height (measured in
+<strong>cm</strong>). This represents a player’s standing height in
+centimeters. Taller players benefit from a higher point of ball contact,
+a more favorable angle into the service box, and a longer swing arc, all
+of which are expected to generate greater serve speed. We hypothesize a
+positive relationship with serve speed.</p></li>
+<li><p><span class="math inline">\(age\)</span>: Age (measured in
+<strong>years</strong>). The player’s age as of the 2025 season.
+Physical explosiveness and swing speed are generally expected to peak in
+a player’s mid-to-late twenties and decline thereafter, leading us to
+expect a negative relationship between age and serve speed.</p></li>
+<li><p><span class="math inline">\(rank\)</span>: ATP ranking
+(<strong>1–100</strong>). This is the player’s end-of-season ATP
 ranking. Given the development of tennis in the last years, we expect
 players with a higher ranked to have a faster serve, as part of a more
 complete game. However, because ranking may itself be considered a
 function of match performance, which is partly determined by serve
 speed, including it might raise reverse causality concerns.</p></li>
-<li><p>frtserve: First serve percentage (measured as a %). This value
-equals the proportion of first serves that land in the serving box.
-Players who serve closer to their physical limit, and at higher speeds,
-tend to miss first serves more frequently, so we expect a negative
-relationship between first serve percentage and average serve speed,
-because faster servers are more likely to miss their first
-serve.</p></li>
-<li><p>dblfault: Double faults (total count). This variable counts the
-total number of double faults committed during the season. Like first
-serve percentage, this variable functions as a behavioral proxy for
-serving aggression. Players who consistently serve at high speeds accept
-a greater risk of double faulting, so we expect a positive association
-between double faults and serve speed. It is not because faulting causes
-speed, but because both reflect the same underlying strategy.</p></li>
-<li><p>rhsize: Racket head size (measured in cm²). This variable
-measures the surface area of a player’s racket head. We expected the
-racket head size and average speed to have a negative relationship, as
-players with a larger head size are expected to generate less power,
-also due to to an increased air resistance. However, we expect this
-variable not to be statistically significant, as professionals tend to
-standardize their equipment, meaning there is not much difference
-between the values for this variable in the sample.</p></li>
-<li><p>rhand: Handedness (1 = right-handed, 0 = left-handed). This is a
-dummy variable indicating whether a player serves with their right hand,
-or with their left hand. We expected this variable to matter for serve
-speed because tennis players that are left-handed usually prioritize
-lower speeds and more spin in their serves, to take advantage of their
-difference against right-handed players.</p></li>
+<li><p><span class="math inline">\(frtserve\)</span>: First serve
+percentage (measured as a <strong>%</strong>). This value equals the
+proportion of first serves that land in the serving box. Players who
+serve closer to their physical limit, and at higher speeds, tend to miss
+first serves more frequently, so we expect a negative relationship
+between first serve percentage and average serve speed, because faster
+servers are more likely to miss their first serve.</p></li>
+<li><p><span class="math inline">\(dblfault\)</span>: Double faults
+(total <strong>count</strong>). This variable counts the total number of
+double faults committed during the season. Like first serve percentage,
+this variable functions as a behavioral proxy for serving aggression.
+Players who consistently serve at high speeds accept a greater risk of
+double faulting, so we expect a positive association between double
+faults and serve speed. It is not because faulting causes speed, but
+because both reflect the same underlying strategy.</p></li>
+<li><p><span class="math inline">\(rhsize\)</span>: Racket head size
+(measured in <strong>cm²</strong>). This variable measures the surface
+area of a player’s racket head. We expected the racket head size and
+average speed to have a negative relationship, as players with a larger
+head size are expected to generate less power, also due to to an
+increased air resistance. However, we expect this variable not to be
+statistically significant, as professionals tend to standardize their
+equipment, meaning there is not much difference between the values for
+this variable in the sample.</p></li>
+<li><p><span class="math inline">\(rhand\)</span>: Handedness (1 =
+right-handed, 0 = left-handed). This is a dummy variable indicating
+whether a player serves with their right hand, or with their left hand.
+We expected this variable to matter for serve speed because tennis
+players that are left-handed usually prioritize lower speeds and more
+spin in their serves, to take advantage of their difference against
+right-handed players.</p></li>
 </ul>
 </div>
 <div id="test-regression" class="section level3">
@@ -556,8 +610,7 @@ summary(reg_test)</code></pre>
 ## Residual standard error: 3.834 on 18 degrees of freedom
 ## Multiple R-squared:  0.6026, Adjusted R-squared:  0.5585 
 ## F-statistic: 13.65 on 2 and 18 DF,  p-value: 0.000247</code></pre>
-<ul>
-<li>Before estimating the full model, we run preliminary regression on a
+<p>Before estimating the full model, we run preliminary regression on a
 convenience sample of the 21 ATP players for whom complete data was most
 readily available at the time. This pilot test regressed average serve
 speed on age and height only, and served two purposes: first, to verify
@@ -582,11 +635,10 @@ velocity. Both findings align with our initial expectations and lend
 early support to the hypothesis that physical attributes are primary
 determinants of serve speed among professional ATP players. However,
 with only 21 observations and 18 degrees of freedom, the sample is far
-too small to support reliable inference.</li>
-</ul>
+too small to support reliable inference.</p>
 </div>
-<div id="list-of-regressions" class="section level3">
-<h3>List of Regressions</h3>
+<div id="regressions" class="section level3">
+<h3>Regressions</h3>
 <p><span class="math display">\[ServeSpeed =\beta_0 + \beta_1 hgt + \mu
 \]</span></p>
 <p><span class="math display">\[ServeSpeed =\beta_0 + \beta_1 hgt +
@@ -595,9 +647,12 @@ too small to support reliable inference.</li>
 \beta_2 hgt + \mu \]</span></p>
 <p><span class="math display">\[ServeSpeed =\beta_0 + \beta_1 age +
 \beta_2 hgt + \beta_3 (hgt)^2 + \mu \]</span></p>
+<p><span class="math display">\[ServeSpeed =\beta_0 + \beta_1 age +
+\beta_2 hgt + \beta_3 rhand + \beta_4 rhsize + \beta_5 fstserve +
+\beta_6 dblfault + \beta_7 small + \mu \]</span></p>
 <p><span class="math display">\[ServeSpeed =\beta_0 + \beta_1 rank +
-\beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 mtch + \beta_6
-rhsize + \beta_7 fstserve + \beta_8 dblfault + \mu \]</span></p>
+\beta_2 age + \beta_3 hgt + \beta_4 rhand + \beta_5 rhsize + \beta_6
+fstserve + \beta_7 dblfault + \mu \]</span></p>
 <pre class="r"><code>heigth_reg &lt;- lm(avgspeed ~ hgt, data = fulldata)
 
 hgt_sq &lt;- fulldata$hgt^2
@@ -1240,23 +1295,22 @@ meaning the model explains roughly 52% of the variation in serve
 speed.</li>
 </ul>
 </div>
-<div id="how-we-found-outliers" class="section level3">
-<h3>How we found outliers</h3>
+<div id="how-did-we-find-outliers" class="section level3">
+<h3>How did we find outliers?</h3>
 <pre class="r"><code>boxplot(fulldata$avgspeed,
         data = fulldata,
-        main=&quot;Average Serve Speed&quot;,
+        main=&quot;Sample Outliers&quot;,
         xlab = &quot;&quot;,
-        ylab = &quot;Height&quot;,
+        ylab = &quot;avgspeed&quot;,
         col = &quot;orange&quot;,
         border = &quot;brown&quot;
         )</code></pre>
-<p><img role="img" aria-label src="data:image/png;base64,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" alt width="672" /></p>
+<p><img role="img" aria-label src="data:image/png;base64,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t5rFJKA3wIubZNd/mWypqIBevNlfu5Vz/KTdBgS0eLtOXrd2/bfJlsoK6MXkVT2h48dtV2QSUKA7hQV0anJ6/Orw8PDx8evAenYCCnSnvIBuRUCB7ggoQFBBAZ28O/7l0++6noAC3SkooK2XXtpAQIHuFBbQ0ZeRJyEtCSjQndICurqicmsCCnSnrICO/1o9Sm6LK6ECCnSnrIDe+vev+9OD0Ph5vIAC3SktoPMHc46//C22DQEFulNcQC/v5ryfcC10tEGubwd8fsoL6DShL+c3xN//8RPHoQIK5FRiQOtrity+/40V6YHdKDOgU6dPFwn1TCRgR4oN6NTpq68FFNidkgNamZydOYUHdqP0gLYkoEB3BBQgqKCATr4/bDXivomAAt0pKKBdEFCgO59dQAG603mjut5gl3b9lw3cLJ03qusNAnwuBBQgSEABggQUICjzM5Eatp5cDzAUAgoQlO8UfvY0DwEFbq6M10An341GD/NtHmDHcg4iVQX9NuP2AXYq6yh8FysyAQxV3mlM507igZsrb0CnJ/EOQYGbKvNE+veHh//IuweAXXEnEkCQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIECShAkIACBAkoQJCAAgQJKECQgAIE/X9+O4l+GQWDPgAAAABJRU5ErkJggg==" alt width="672" /></p>
 <p>Taking out the outliers does not impact the significance of the
 coefficients.</p>
 </div>
-<div id="diagnosis" class="section level3">
-<h3>Diagnosis</h3>
-<p>all heteroskedasticity tests here</p>
+<div id="ultimate-diagnosis" class="section level3">
+<h3>Ultimate Diagnosis</h3>
 <pre class="r"><code>#BP and White Test for age and height
 bptest(avgspeed ~ age + hgt, data = fulldata, studentize=TRUE)</code></pre>
 <pre><code>## 
