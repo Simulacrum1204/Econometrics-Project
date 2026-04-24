@@ -158,30 +158,32 @@ htmlreg(list(heigth_reg, heigthsq_reg, hgtage_reg, hgtsqage_reg, outlier_reg, fi
 ```
 
 
-### Regression 1 & 2: Height
+### Regression Results
 
-$$ServeSpeed =\beta_0 + \beta_1 hgt + \mu $$
+We discuss the findings of the table with all regressions variable by variable, tracing how each coefficient evolves as the model is built out.
 
-$$ServeSpeed =\beta_0 + \beta_1 hgt + \beta_2 hgt^2 + \mu $$
+* $ranking (rank)$: Ranking is positive (0.035) but not statistically significant (p = 0.137). Higher-ranked players do not appear to serve meaningfully faster than lower-ranked ones within the top 100, once physical and behavioral characteristics are accounted for. This is consistent with the broader finding that serve speed is a specific, height-driven attribute rather than a general marker of overall tennis quality — players can reach and sustain a top-100 ranking through many different combinations of skills, of which serve speed is only one.
 
-The squared term for height was tested but found to be insignificant, confirming a linear relationship between height and serve speed. For this reason, it will be excluded from the future regressions.
+* $Age (age)$: Age presents one of the more instructive contrasts in this analysis. In the preliminary test regression on our 21-player convenience sample, age appeared significant at the 95% level with a coefficient of −0.586, suggesting that each additional year of age reduced serve speed by over half a kilometer per hour. This seemed to confirm our hypothesis that physical decline meaningfully affects serving power.
+However, once the full 100-player dataset is used, this result disappears entirely. Across every full-sample specification — whether paired only with height, or alongside the complete set of variables — age carries a negative coefficient in the range of −0.103 to −0.128, but never approaches statistical significance (p-values ranging from 0.341 to 0.433). The contrast between the test regression and the full-sample results is a deliberate and instructive reminder of the risks of small-sample inference: a finding that appeared robust at n=21 was simply an artifact of limited data.
+The most likely explanation for age's insignificance in the full sample is a selection effect. The ATP top 100 is not a random cross-section of players at various stages of physical decline — it is, by definition, an elite group. Older players who remain ranked in the top 100 at age 33, 35, or beyond have done so precisely because they have preserved their physical capabilities. Players who have genuinely declined in serve speed are no longer in this sample. Within this compressed, self-selected group, age loses its predictive power.
 
-### Regression 3: Height and Age
+* $Height (hgt)$: Height is the central finding of this paper, and its story across all specifications is remarkably consistent. In the simplest model — regressing serve speed on height alone — each additional centimeter of height is associated with a 0.766 km/h increase in average serve speed, significant at the 99.9% confidence level. This single variable explains nearly 50% of the total variation in serve speed (R² = 0.495), an exceptional result for a one-variable regression that immediately signals height as the dominant structural driver of serving power.
+To test whether this relationship exhibits diminishing returns — that is, whether extreme height eventually stops paying off in serve speed — we introduce a quadratic term (hgt²). It is not statistically significant (p = 0.942), and the adjusted R² slightly decreases, penalizing the added complexity. The relationship between height and serve speed is linear throughout the range observed in our sample: every centimeter yields roughly the same return, with no evidence that very tall players see a smaller marginal benefit. This is the reason why the squared value of height does not appear in the final regression.
+As additional variables are introduced, height's coefficient remains virtually unchanged — 0.776 when age is added, 0.781 in the full model with all variables included — and it retains 99.9% significance in every single specification. This stability is not a minor technical detail; it is strong evidence that height's effect is not being confounded by any of the other variables in our dataset. For a coach or scout, the practical implication is clear: the difference between a 180 cm and a 198 cm player carries a predicted serve speed advantage of approximately 13.8 km/h — a gap that is largely structural, persistent, and not easily compensated for through training or equipment.
 
-$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \mu $$
+* $Hand (rhand)$: Right-handed players are estimated to serve approximately 2.1–2.2 km/h faster than left-handed players across the specifications that include this variable, but the coefficient never reaches statistical significance (p-values around 0.165–0.187). The sample composition largely explains this: with 87 right-handed players and only 13 left-handed players, the test simply lacks the statistical power to detect even a moderate true effect. A meaningful test of handedness as a determinant of serve speed would require a more balanced sample, potentially drawing from a broader population of players beyond the top 100.
 
-$$ServeSpeed =\beta_0 + \beta_1 age + \beta_2 hgt + \beta_3 (hgt)^2 + \mu $$
+* $Racket Head Size (rhsize)$: Racket head size is positive across all specifications where it is included, with a coefficient ranging from 0.069 to 0.109. In the final model it reaches marginal significance at the 10% level (p = 0.088), though it does not clear the 5% threshold in any specification. The direction is somewhat counterintuitive relative to our original hypothesis — we expected a negative relationship based on air resistance concerns — but a positive sign is plausible if a larger sweet spot allows players to make more consistent high-speed contact, converting aggressive swing speeds into faster ball velocity more reliably.
+That said, the result is not robust enough to draw firm conclusions. The range of racket head sizes in the sample is narrow (600–645 cm²), which limits the model's ability to detect this effect precisely. This variable warrants further investigation in a dataset with greater equipment variation.
 
+* $First Serve % (frtserve)$: First serve percentage carries a negative coefficient in every specification (ranging from −0.174 to −0.231), consistent with the intuition that players who serve closer to their physical limit will miss more first serves. However, it never reaches statistical significance (p-values around 0.145–0.265). The likely explanation is that this variable and double faults are capturing the same underlying construct — serve aggression — and in the presence of both, neither fully dominates. The double fault variable appears to carry this signal more cleanly, leaving first serve percentage without independent explanatory power.
 
-### Regression 4: All Variables
+* $Double Faults (dblfault)$: Double faults emerge as the only variable besides height to reach conventional statistical significance in the full model. Each additional double fault over the course of a season is associated with a 0.029 km/h increase in average serve speed (p = 0.012, significant at the 95% level). In the no-outlier specification, the coefficient is slightly smaller at 0.017 but remains significant at the 10% level.
+The interpretation here is behavioral, not causal. Double faults do not make players serve faster — rather, players who choose to serve at higher speeds on both first and second deliveries naturally commit more double faults as a consequence of that aggression. The double fault count functions as a proxy for serving risk tolerance: it captures the strategic decision to prioritize speed over consistency. A coach should read this not as a reason to accept more double faults, but as confirmation that elite servers are consciously operating at the edge of their delivery margin.
 
-* Height (hgt): Statistically significant at the 99.9% level (p < 0.001). Each additional centimeter of height increases average serve speed by 0.761 km/h, holding all else constant. This is the dominant predictor in the model and is consistent across every specification tested.
-* Double Faults (dblfault): Significant at the 95% level (p = 0.042). Each additional double fault is associated with a 0.019 km/h increase in serve speed. This likely reflects a behavioral pattern — players who serve harder accept a higher fault risk, so double faults are a proxy for serve aggression rather than a cause of speed.
-* Age (age): Negative coefficient (−0.103) but not statistically significant (p = 0.433). Age does not independently explain serve speed variation once height is controlled for. This contradicts our initial test-sample result and suggests the earlier significance was driven by the small n=21 sample.
-* Dummy Variable (rhand): Positive coefficient (2.209) suggesting right-handers serve ~2.2 km/h faster, but not significant (p = 0.165). Sample is heavily skewed right-handed (87%), limiting statistical power.
-* Racket Head Size (rhsize): Positive (0.092) but not significant (p = 0.144). Equipment does not appear to meaningfully explain serve speed differences at the professional level, consistent with the idea that all top players optimize their equipment.
-* First Serve % (frtserve): Negative (−0.224) but not significant (p = 0.145). The direction is intuitive — players who serve harder make a lower percentage — but the effect is absorbed by other variables.
-The overall fit of the model can be seen through the adjusted R^2 = 0.517, meaning the model explains roughly 52% of the variation in serve speed. 
+* Outlier Check: Using a boxplot of average serve speeds, we identified a small number of players at the upper end of the distribution — those averaging above 205 km/h — as potential outliers that could be exerting disproportionate influence on the results. To test this, we construct a dummy variable equal to one for players below this threshold (capturing the non-outlier group) and include it as an additional control.
+The dummy itself is negative and significant at the 10% level (−7.672, p = 0.066), confirming that the flagged observations do serve measurably faster than the rest of the sample. Controlling for the outliers in the regression does not impact the significance of the coefficients. Crucially, none of the other coefficients change meaningfully in sign, magnitude, or significance. Height retains its 99.9% significance, double faults remain significant, and all other variables remain non-significant. The core findings of this paper are not an artifact of a handful of extreme servers — they hold cleanly across the full distribution of the sample.
 
 ### How did we find outliers?
 
@@ -194,9 +196,10 @@ boxplot(fulldata$avgspeed,
         col = "orange",
         border = "brown"
         )
+
+small <- ifelse(fulldata$avgspeed<205, 1, 0)
 ```
 
-Taking out the outliers does not impact the significance of the coefficients. 
 
 ### Ultimate Diagnosis
 
@@ -242,9 +245,15 @@ pchisq(reg6_lm_stat, df=2, lower.tail = FALSE)
 plot(fitted(reg_6), residuals(reg_6))
 ```
 
-The results from both BP test and White test prove that the model including age and height is homoskedastic. Both tests confirm the model's residuals have constant variance. Standard errors and significance levels reported in the regression output are therefore reliable and do not require correction.
+A key assumption of OLS regression is homoskedasticity — that the variance of the error term is constant across all observations. If this assumption is violated, standard errors become unreliable, and the significance levels we report for our coefficients can no longer be trusted. We test for heteroskedasticity formally across our two primary specifications using two complementary procedures: the Breusch-Pagan (BP) test and the White test.
 
-The final regression model does not suffer from heteroskedasticity. We can trust the significance and standard errors to be correct.
+The Breusch-Pagan test examines whether the squared residuals of the model can be explained by the independent variables. A significant result indicates that error variance is systematically related to the regressors — a sign of heteroskedasticity. The White test is a more general, flexible version of this procedure that also allows for non-linear and interaction effects in the error variance, making it less sensitive to specific assumptions about the form of heteroskedasticity.
+
+For the Height and Age model (Regression 3): the Breusch-Pagan test returns a statistic of BP = 2.083 with 2 degrees of freedom and a p-value of 0.353. The White test returns an LM statistic of 0.609 with a corresponding p-value of 0.738. Both p-values are far above conventional significance thresholds. We fail to reject the null hypothesis of homoskedasticity under both tests, meaning the residuals from this model display constant variance across all fitted values.
+
+For the Final Model (Regression 4): the Breusch-Pagan test returns BP = 7.893 with 7 degrees of freedom and a p-value of 0.342. The White test returns an LM statistic of 0.501 with a p-value of 0.779. Again, both tests fail to reject the null hypothesis of constant variance. The residual-versus-fitted plots for both models further confirm this: the scatter of residuals around zero is roughly uniform across the range of predicted values, with no discernible fan shape, curvature, or systematic pattern that would indicate non-constant variance.
+
+The implication is straightforward and important: both models are homoskedastic. The standard errors reported in all regression tables are valid, and the significance levels attributed to each coefficient can be trusted without correction. No robust standard error adjustment (such as HC standard errors) is necessary, and the inference drawn throughout this paper rests on a statistically sound foundation.
 
 The primary endogeneity concern in this model is the omitted variable of toss height/point of contact, which we already identified in our original variable list. This variable is positively correlated with both height (taller players make contact higher with the ball) and serve speed, meaning height's coefficient may carry a slight upward bias. Since toss height is unavailable to us from the official ATP data, it cannot be directly controlled for in our regression. However, because it is largely a function of height itself, we believe the bias to be insignificant. A second concern is reverse causality between double faults and serve speed, as players usually decrease serve speed because they are already double-faulting frequently. It becomes a matter of strategy more than a matter of physical capabilities. 
 
